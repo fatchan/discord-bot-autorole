@@ -1,0 +1,28 @@
+{
+  "name": "autorole",
+  "version": "1.0.0",
+  "description": "simple discord bot to auto give roles",
+  "main": "bot.js",
+  "dependencies": {
+    "eris": "^0.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fatchan/discord-bot-autorole.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "autorole"
+  ],
+  "author": "Tom 69420#9999",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fatchan/discord-bot-autorole/issues"
+  },
+  "homepage": "https://github.com/fatchan/discord-bot-autorole#readme"
+}
