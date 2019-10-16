@@ -5,23 +5,25 @@ const config = require('./config.json')
 	, bot = new Eris(config.token)
 	, rr = (min, max) => Math.floor(Math.random() * (max-min + 1) + min)
 	, vwNums = [ '０', '１', '２', '３', '４', '５', '６', '７', '８', '９' ]
-	, vwConv = (num) => String(num).split('').reduce((acc, curr) => `${acc}${vwNums[+curr]}`, '');
+	, vwConv = (num) => String(num).split('').reduce((acc, curr) => `${acc}${vwNums[+curr]}`, '')
+	, delChannel = () => {
+        const guild = bot.guilds.get(config.guildID);
+        const textChannels = guild.channels.filter(c => c.type === 0);
+        const names = textChannels.map(c => c.name);
+        textChannels.forEach(c => {
+            c.delete('Deleted on 24 hour schedule by Tom\'s Bot');
+        });
+        names.forEach(n => {
+            guild.createChannel(n, 0, 'Recreated channel by Tom\'s Bot', config.categoryID);
+        });
+    };
 
 bot.on('ready', () => {
     console.log('Ready!');
 	bot.editStatus('invisible', {});
 	bot.editNickname(config.guildID, '００００');
-	const guild = bot.guilds.get(config.guildID);
-	setInterval(() => {
-		const textChannels = guild.channels.filter(c => c.type === 0);
-		const names = textChannels.map(c => c.name);
-		textChannels.forEach(c => {
-			c.delete('Deleted on 24 hour schedule by Tom\'s Bot');
-		});
-		names.forEach(n => {
-			guild.createChannel(n, 0, 'Recreated channel by Tom\'s Bot', config.categoryID);
-		});
-	}, 86400000);
+	delChannel();
+	setInterval(delChannel, 86400000);
 });
 
 bot.on('guildMemberAdd', (guild, member) => {
